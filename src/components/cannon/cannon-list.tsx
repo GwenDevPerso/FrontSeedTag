@@ -1,16 +1,8 @@
 import {useCannonStatus} from "@/hooks/useCannonStatus";
 import {Cannon} from "./cannon";
 
-export const CanonList = () => {
+export const CannonList = () => {
     const {isConnected, cannons} = useCannonStatus();
-
-    // if (error) {
-    //     return (
-    //         <div className="text-red-500 text-sm">
-    //             Error: {error}
-    //         </div>
-    //     );
-    // }
 
     if (!isConnected) {
         return (
@@ -26,7 +18,7 @@ export const CanonList = () => {
             {cannons.map((cannon) => (
                 <Cannon
                     key={cannon.generation}
-                    name={`Canon ${cannon.generation}`}
+                    name={`Cannon ${cannon.generation}`}
                     generation={cannon.generation}
                     status={cannon.available ? "Available" : "Unavailable"}
                 />

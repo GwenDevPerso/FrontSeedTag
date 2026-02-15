@@ -1,11 +1,11 @@
 import useWebSocket, {ReadyState} from "react-use-websocket";
 import {useMemo} from "react";
-import type {CannonsStatusResponse, CannonStatus} from "@/types/cannon";
-
+import type {CannonsStatusResponse, CannonStatus} from "@/types/cannon.types";
+import {getCannonsStatusWsUrl} from "@/lib/config";
 
 export function useCannonStatus() {
     const {lastJsonMessage, readyState} = useWebSocket(
-        "ws://localhost:3000/cannons/status",
+        getCannonsStatusWsUrl(),
         {
             shouldReconnect: () => true,
             reconnectInterval: 5000,
@@ -21,7 +21,6 @@ export function useCannonStatus() {
 
             // Vérifier que la structure est correcte
             if (event && Array.isArray(event.cannons)) {
-                console.log("Last JSON message", event.cannons);
                 return event.cannons;
             }
 
