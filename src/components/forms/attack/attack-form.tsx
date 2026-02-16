@@ -2,36 +2,26 @@
 
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Controller, useForm, useWatch} from "react-hook-form";
-import * as z from "zod";
-import {Button} from "../ui/button";
+import {Button} from "../../ui/button";
 import {
   FieldError,
   FieldLegend,
   FieldSet,
-} from "../ui/field";
+} from "../../ui/field";
 import type {
   AttackRequestPayload,
   AttackResponsePayload,
   ScanPoint,
-} from "../../types/attack.types";
-import {ATTACK_PROTOCOLS} from "../../types/attack.types";
+} from "../../../types/attack.types";
+import {ATTACK_PROTOCOLS} from "../../../types/attack.types";
 import {fetchJson} from "@/lib/utils";
 import {getAttackUrl} from "@/lib/config";
-import {Label} from "../ui/label";
-import {Checkbox} from "../ui/checkbox";
-import {Field} from "../ui/field";
+import {Label} from "../../ui/label";
+import {Checkbox} from "../../ui/checkbox";
+import {Field} from "../../ui/field";
 import {Loader2} from "lucide-react";
 import {triggerMusicPlay} from "@/lib/music-control";
-
-const AttackFormSchema = z.object({
-  protocols: z
-    .array(z.enum(ATTACK_PROTOCOLS))
-    .min(1, "Sélectionnez au moins un protocole"),
-});
-
-
-export type AttackFormValues = z.infer<typeof AttackFormSchema>;
-
+import {AttackFormSchema, type AttackFormValues} from "./attack-form.schema";
 
 type AttackFormProps = {
   scanPoints: ScanPoint[];

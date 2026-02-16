@@ -1,12 +1,12 @@
-import {Card, CardContent, CardHeader, CardTitle} from "./ui/card";
-import {CannonList} from "./cannon/cannon-list";
-import {RadarChart} from "./radar";
-import {RadarScanOverlay} from "./scan";
+import {Card, CardContent, CardHeader, CardTitle} from "../ui/card";
+import {CannonList} from "../cannon/cannon-list";
+import {RadarChart} from "../radar/radar";
+import {RadarScanOverlay} from "../scan/scan";
 import {useState} from "react";
-import type {AttackResponsePayload, Coordinates, ScanPoint} from "../types/attack.types";
-import {DestructionEffect} from "./destruction-effect";
-import {CreateScanPointForm} from "./forms/create-scanpoint-form";
-import {AttackForm} from "./forms/attack-form";
+import type {AttackResponsePayload, Coordinates, ScanPoint} from "../../types/attack.types";
+import {DestructionEffect} from "../destruction-effect";
+import {CreateScanPointForm} from "../forms/point/create-scanpoint-form";
+import {AttackForm} from "../forms/attack/attack-form";
 
 export const Dashboard = () => {
     const [scanPoints, setScanPoints] = useState<ScanPoint[]>([]);
@@ -34,7 +34,7 @@ export const Dashboard = () => {
                 <CardTitle className="text-neon">Dashboard</CardTitle>
             </CardHeader>
             {attackError !== null && (
-                <p className="mx-auto text-sm text-destructive glow-red bg-transparent rounded-md p-2 max-w-[400px] text-center">{attackError}</p>
+                <p data-testid="attack-error" className="mx-auto text-sm text-destructive glow-red bg-transparent rounded-md p-2 max-w-[400px] text-center">{attackError}</p>
             )}
             <CardContent className="flex flex-col gap-4 items-center justify-center">
                 <div className="flex flex-row gap-4 items-center justify-around w-full">

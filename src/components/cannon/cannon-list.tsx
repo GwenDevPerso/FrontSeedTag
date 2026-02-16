@@ -6,7 +6,7 @@ export const CannonList = () => {
 
     if (error) {
         return (
-            <div className="text-red-500 text-sm glow-red">
+            <div data-testid="cannon-list-error" className="text-red-500 text-sm glow-red">
                 {error}
             </div>
         );
@@ -14,14 +14,14 @@ export const CannonList = () => {
 
     if (!isConnected) {
         return (
-            <div className="bg-transparent rounded-md p-2 text-yellow-500 text-sm glow-neon">
+            <div data-testid="cannon-list-connecting" className="bg-transparent rounded-md p-2 text-yellow-500 text-sm glow-neon">
                 Connecting to WebSocket...
             </div>
         );
     }
 
     return (
-        <div className="flex flex-row gap-4 items-center justify-center">
+        <div data-testid="cannon-list" className="flex flex-row gap-4 items-center justify-center">
             {cannons.map((cannon) => (
                 <Cannon
                     key={cannon.generation}

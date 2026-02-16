@@ -6,7 +6,7 @@ import {
     CartesianGrid,
     ResponsiveContainer,
 } from "recharts";
-import type {Coordinates} from "../types/attack.types";
+import type {Coordinates} from "../../types/attack.types";
 
 
 const CHART_SIZE = 400;

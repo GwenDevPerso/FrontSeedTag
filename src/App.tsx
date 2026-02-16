@@ -1,5 +1,5 @@
 import './App.css';
-import {Dashboard} from './components/dashboard';
+import {Dashboard} from './components/dashboard/dashboard';
 import {BackgroundMusic} from './components/background-music';
 
 function App() {

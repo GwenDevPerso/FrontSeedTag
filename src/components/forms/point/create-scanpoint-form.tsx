@@ -2,47 +2,17 @@
 
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Controller, useForm} from "react-hook-form";
-import * as z from "zod";
-import {Button} from "../ui/button";
-import {Input} from "../ui/input";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
 import {
   Field,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "../ui/field";
-import type {ScanPoint} from "../../types/attack.types";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../ui/select";
-
-const ENEMY_TYPES = ["soldier", "mech"] as const;
-
-const scanPointSchema = z.object({
-  x: z.coerce
-    .number("X doit être un nombre")
-    .min(-100, "X doit être entre -100 et 100")
-    .max(100, "X doit être entre -100 et 100"),
-  y: z.coerce
-    .number("Y doit être un nombre")
-    .min(-100, "Y doit être entre -100 et 100")
-    .max(100, "Y doit être entre -100 et 100"),
-  enemyType: z.enum(ENEMY_TYPES, {
-    message: `Le type doit être l'un de: ${ENEMY_TYPES.join(", ")}`,
-  }),
-  enemyNumber: z.coerce
-    .number("Le nombre d'ennemis doit être un nombre")
-    .int("Le nombre d'ennemis doit être un entier")
-    .min(0, "Le nombre d'ennemis doit être positif ou nul"),
-  allies: z.preprocess(
-    (val) => (val === "" || val === null || val === undefined ? undefined : val),
-    z.coerce
-      .number("Le nombre d'alliés doit être un nombre")
-      .int("Le nombre d'alliés doit être un entier")
-      .min(0, "Le nombre d'alliés doit être positif ou nul")
-      .optional()
-  ),
-});
-
-export type ScanPointFormValues = z.infer<typeof scanPointSchema>;
+} from "@/components/ui/field";
+import type {ScanPoint} from "@/types/attack.types";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
+import {CreateScanPointSchema, ENEMY_TYPES, type ScanPointFormValues} from "./create-scanpoint.schema";
 
 
 type CreateScanPointFormProps = {
@@ -53,7 +23,7 @@ export const CreateScanPointForm = ({
   onAddScanPoint,
 }: CreateScanPointFormProps) => {
   const form = useForm({
-    resolver: zodResolver(scanPointSchema),
+    resolver: zodResolver(CreateScanPointSchema),
     defaultValues: {
       x: "",
       y: "",
@@ -148,13 +118,16 @@ export const CreateScanPointForm = ({
               >
                 Enemy type
               </FieldLabel>
-              <Select {...field}>
-                <SelectTrigger>
+              <Select
+                value={field.value}
+                onValueChange={field.onChange}
+              >
+                <SelectTrigger data-testid="scanpoint-enemyType">
                   <SelectValue placeholder="Select..." />
                 </SelectTrigger>
                 <SelectContent>
                   {ENEMY_TYPES.map((t) => (
-                    <SelectItem key={t} value={t}>{t}</SelectItem>
+                    <SelectItem key={t} value={t} data-testid={`scanpoint-enemyType-${t}`}>{t}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
