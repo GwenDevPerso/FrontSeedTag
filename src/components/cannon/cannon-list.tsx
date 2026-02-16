@@ -6,7 +6,7 @@ export const CannonList = () => {
 
     if (!isConnected) {
         return (
-            <div className="text-yellow-500 text-sm">
+            <div className="text-yellow-500 text-sm glow-neon">
                 Connecting to WebSocket...
             </div>
         );

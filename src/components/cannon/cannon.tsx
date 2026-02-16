@@ -16,13 +16,13 @@ export const Cannon = ({
     return (
         <Card>
             <CardHeader>
-                <CardTitle>{name}</CardTitle>
+                <CardTitle className="text-neon">{name}</CardTitle>
                 <CardDescription>Generation {generation}</CardDescription>
             </CardHeader>
             <CardContent>
                 <Badge variant="outline" className="flex items-center gap-2">
                     <Circle
-                        className={`w-4 h-4 ${isAvailable ? "text-green-500 fill-green-500" : "text-red-500 fill-red-500"
+                        className={`w-4 h-4 ${isAvailable ? "text-primary fill-primary glow-neon" : "text-destructive fill-destructive glow-red"
                             }`}
                     />
                     <span>{status}</span>

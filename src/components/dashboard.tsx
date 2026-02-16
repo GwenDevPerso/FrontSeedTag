@@ -31,10 +31,10 @@ export const Dashboard = () => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Dashboard</CardTitle>
+                <CardTitle className="text-neon">Dashboard</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-4 items-center justify-center">
-                <div className="flex flex-row gap-4 items-center justify-center">
+                <div className="flex flex-row gap-4 items-center justify-around w-full">
                     <CannonList />
                     <AttackForm
                         scanPoints={scanPoints}
@@ -42,11 +42,11 @@ export const Dashboard = () => {
                         onAttackError={handleAttackError}
                     />
                     {attackError !== null && (
-                        <p className="text-sm text-destructive">{attackError}</p>
+                        <p className="text-sm text-destructive glow-red">{attackError}</p>
                     )}
                 </div>
                 <div className="grid grid-cols-2 w-full gap-4 mt-10">
-                    <div className="radar-container w-[400px] h-[400px] overflow-hidden relative rounded-full bg-black border-2 border-green-500">
+                    <div className="radar-container w-[400px] h-[400px] overflow-hidden relative rounded-full bg-black border-2 border-neon glow-neon">
                         <RadarChart coordinates={scanPoints.map(point => point.coordinates)} />
                         <RadarScanOverlay />
                         {destroyedTarget !== null && (

@@ -20,6 +20,7 @@ import {getAttackUrl} from "@/lib/config";
 import {Label} from "../ui/label";
 import {Checkbox} from "../ui/checkbox";
 import {Field} from "../ui/field";
+import {Loader2} from "lucide-react";
 
 const AttackFormSchema = z.object({
   protocols: z
@@ -113,10 +114,15 @@ export const AttackForm = ({
       <div className="flex justify-center items-center">
         <Button
           type="submit"
+          variant="destructive"
           disabled={scanPoints.length === 0 || protocols.length === 0 || isSubmitting}
-          className="rounded-full h-16 w-16 bg-red-500 text-white cursor-pointer hover:bg-red-600 hover:scale-105 transition-all duration-300 disabled:hover:scale-100 disabled:opacity-50 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center"
+          className="rounded-full h-16 w-16 cursor-pointer hover:scale-105 transition-all duration-300 disabled:hover:scale-100 disabled:cursor-not-allowed flex items-center justify-center"
         >
-          <span className="relative z-10">{isSubmitting ? "Sending…" : "Fire"}</span>
+          {isSubmitting ? (
+            <Loader2 className="size-6 animate-spin" />
+          ) : (
+            <span className="relative z-10">Fire</span>
+          )}
         </Button>
       </div>
     </form>
