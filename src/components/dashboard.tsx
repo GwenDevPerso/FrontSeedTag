@@ -33,17 +33,18 @@ export const Dashboard = () => {
             <CardHeader>
                 <CardTitle className="text-neon">Dashboard</CardTitle>
             </CardHeader>
+            {attackError !== null && (
+                <p className="mx-auto text-sm text-destructive glow-red bg-transparent rounded-md p-2 max-w-[400px] text-center">{attackError}</p>
+            )}
             <CardContent className="flex flex-col gap-4 items-center justify-center">
                 <div className="flex flex-row gap-4 items-center justify-around w-full">
                     <CannonList />
+
                     <AttackForm
                         scanPoints={scanPoints}
                         onAttackSuccess={handleAttackSuccess}
                         onAttackError={handleAttackError}
                     />
-                    {attackError !== null && (
-                        <p className="text-sm text-destructive glow-red">{attackError}</p>
-                    )}
                 </div>
                 <div className="grid grid-cols-2 w-full gap-4 mt-10">
                     <div className="radar-container w-[400px] h-[400px] overflow-hidden relative rounded-full bg-black border-2 border-neon glow-neon">

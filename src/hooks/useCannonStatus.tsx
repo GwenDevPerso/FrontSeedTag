@@ -1,10 +1,11 @@
 import useWebSocket, {ReadyState} from "react-use-websocket";
 import {useMemo} from "react";
-import type {CannonsStatusResponse, CannonStatus} from "@/types/cannon.types";
+import type {CannonsStatusResponse} from "@/types/cannon.types";
 import {getCannonsStatusWsUrl} from "@/lib/config";
 
 export function useCannonStatus() {
-    const {lastJsonMessage, readyState} = useWebSocket(
+
+    const {lastJsonMessage, readyState, } = useWebSocket(
         getCannonsStatusWsUrl(),
         {
             shouldReconnect: () => true,
@@ -13,21 +14,25 @@ export function useCannonStatus() {
         }
     );
 
-    const cannons = useMemo<CannonStatus[]>(() => {
-        if (!lastJsonMessage) return [];
+    const {cannons, error} = useMemo(() => {
+        if (!lastJsonMessage) {
+            return {cannons: [], error: null};
+        }
 
         try {
             const event = lastJsonMessage as CannonsStatusResponse;
 
             if (event && Array.isArray(event.cannons)) {
-                return event.cannons;
+                return {cannons: event.cannons, error: null};
             }
 
-            console.warn("Invalid WebSocket message structure:", event);
-            throw new Error("Invalid WebSocket message structure");
-        } catch (error) {
-            console.error("Error parsing WebSocket message:", error);
-            throw new Error("Error parsing WebSocket message");
+            const errorMsg = `Invalid WebSocket message structure: ${JSON.stringify(event)}`;
+            console.error(errorMsg);
+            return {cannons: [], error: errorMsg};
+        } catch (err) {
+            const errorMsg = `Error parsing WebSocket message: ${err}`;
+            console.error(errorMsg);
+            return {cannons: [], error: errorMsg};
         }
     }, [lastJsonMessage]);
 
@@ -35,5 +40,6 @@ export function useCannonStatus() {
     return {
         isConnected: readyState === ReadyState.OPEN,
         cannons,
+        error
     };
 }
