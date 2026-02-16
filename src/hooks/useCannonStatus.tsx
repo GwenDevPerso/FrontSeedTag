@@ -9,7 +9,7 @@ export function useCannonStatus() {
         {
             shouldReconnect: () => true,
             reconnectInterval: 5000,
-            share: true, // important si plusieurs composants écoutent
+            share: true,
         }
     );
 
@@ -19,7 +19,6 @@ export function useCannonStatus() {
         try {
             const event = lastJsonMessage as CannonsStatusResponse;
 
-            // Vérifier que la structure est correcte
             if (event && Array.isArray(event.cannons)) {
                 return event.cannons;
             }

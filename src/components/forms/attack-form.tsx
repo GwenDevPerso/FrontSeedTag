@@ -21,6 +21,7 @@ import {Label} from "../ui/label";
 import {Checkbox} from "../ui/checkbox";
 import {Field} from "../ui/field";
 import {Loader2} from "lucide-react";
+import {triggerMusicPlay} from "@/lib/music-control";
 
 const AttackFormSchema = z.object({
   protocols: z
@@ -62,6 +63,8 @@ export const AttackForm = ({
       onAttackError(new Error("Ajoutez au moins un point de scan"));
       return;
     }
+
+    triggerMusicPlay();
 
     const payload: AttackRequestPayload = {
       protocols: data.protocols,

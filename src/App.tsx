@@ -1,10 +1,14 @@
 import './App.css';
 import {Dashboard} from './components/dashboard';
+import {BackgroundMusic} from './components/background-music';
 
 function App() {
 
   return (
-    <Dashboard />
+    <>
+      <BackgroundMusic src="/musics/star_wars_cantina_128k.mp3" />
+      <Dashboard />
+    </>
   );
 }
 
