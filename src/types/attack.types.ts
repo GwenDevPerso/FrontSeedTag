@@ -1,6 +1,8 @@
 export type Coordinates = { x: number; y: number };
 
-export type Enemies = { type: string; number: number };
+export type Enemies = { type: EnemyTypes; number: number };
+
+export type EnemyTypes = "soldier" | "mech";
 
 export type ScanPoint = {
   coordinates: Coordinates;

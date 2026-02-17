@@ -1,27 +1,26 @@
-"use client";
-
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Controller, useForm, useWatch} from "react-hook-form";
-import {Button} from "../../ui/button";
+import {Loader2} from "lucide-react";
+
+import {Button} from "@/components/ui/button";
 import {
   FieldError,
   FieldLegend,
   FieldSet,
-} from "../../ui/field";
+  Field,
+} from "@/components/ui/field";
+import {Checkbox} from "@/components/ui/checkbox";
+import {Label} from "@/components/ui/label";
+import {ATTACK_PROTOCOLS} from "@/types/attack.types";
 import type {
   AttackRequestPayload,
   AttackResponsePayload,
   ScanPoint,
-} from "../../../types/attack.types";
-import {ATTACK_PROTOCOLS} from "../../../types/attack.types";
+} from "@/types/attack.types";
+import {AttackFormSchema, type AttackFormValues} from "./attack-form.schema";
 import {fetchJson} from "@/lib/utils";
 import {getAttackUrl} from "@/lib/config";
-import {Label} from "../../ui/label";
-import {Checkbox} from "../../ui/checkbox";
-import {Field} from "../../ui/field";
-import {Loader2} from "lucide-react";
 import {triggerMusicPlay} from "@/lib/music-control";
-import {AttackFormSchema, type AttackFormValues} from "./attack-form.schema";
 
 type AttackFormProps = {
   scanPoints: ScanPoint[];

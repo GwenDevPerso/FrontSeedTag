@@ -1,5 +1,3 @@
-"use client";
-
 import {useEffect, useRef} from "react";
 import {MUSIC_PLAY_EVENT} from "@/lib/music-control";
 
