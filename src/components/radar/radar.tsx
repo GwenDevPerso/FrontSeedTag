@@ -9,11 +9,10 @@ import {
 import type {Coordinates} from "../../types/attack.types";
 
 
-const CHART_SIZE = 400;
 const DOMAIN: [number, number] = [-200, 200];
 
 export const RadarChart = ({coordinates}: {coordinates: Coordinates[];}) => (
-    <ResponsiveContainer width={CHART_SIZE} height={CHART_SIZE}>
+    <ResponsiveContainer width="100%" height="100%">
         <ScatterChart margin={{top: 0, right: 0, bottom: 0, left: 0}}>
             <CartesianGrid stroke="#0f0" strokeOpacity={0.15} />
             <XAxis

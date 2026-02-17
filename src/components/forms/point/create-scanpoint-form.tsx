@@ -51,7 +51,7 @@ export const CreateScanPointForm = ({
       className="flex flex-col gap-3"
     >
       <FieldGroup>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <Controller
             name="x"
             control={form.control}

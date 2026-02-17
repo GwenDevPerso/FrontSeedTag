@@ -76,7 +76,7 @@ export const AttackForm = ({
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
-      className="flex flex-row gap-4 justify-center"
+      className="flex flex-col md:flex-row gap-4 justify-center"
     >
       <Controller
         name="protocols"
@@ -84,7 +84,7 @@ export const AttackForm = ({
         render={({field, fieldState}) => (
           <FieldSet data-invalid={fieldState.invalid}>
             <FieldLegend variant="label">Protocols</FieldLegend>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {ATTACK_PROTOCOLS.map((protocol) => (
                 <Field orientation="horizontal" data-invalid={fieldState.invalid} key={protocol}>
                   <Checkbox id={`protocol-checkbox-${protocol}`} name={`protocol-checkbox-${protocol}`} checked={field.value.includes(protocol)}

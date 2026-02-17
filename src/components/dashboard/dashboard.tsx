@@ -37,7 +37,7 @@ export const Dashboard = () => {
                 <p data-testid="attack-error" className="mx-auto text-sm text-destructive glow-red bg-transparent rounded-md p-2 max-w-[400px] text-center">{attackError}</p>
             )}
             <CardContent className="flex flex-col gap-4 items-center justify-center">
-                <div className="flex flex-row gap-4 items-center justify-around w-full">
+                <div className="flex flex-col md:flex-row gap-4 items-center justify-around w-full">
                     <CannonList />
 
                     <AttackForm
@@ -46,8 +46,8 @@ export const Dashboard = () => {
                         onAttackError={handleAttackError}
                     />
                 </div>
-                <div className="grid grid-cols-2 w-full gap-4 mt-10">
-                    <div className="radar-container w-[400px] h-[400px] overflow-hidden relative rounded-full bg-black border-2 border-neon glow-neon">
+                <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 mt-10">
+                    <div className="radar-container w-full max-w-[400px] h-[300px] md:h-[350px] lg:h-[400px] overflow-hidden relative rounded-full bg-black border-2 border-neon glow-neon mx-auto">
                         <RadarChart coordinates={scanPoints.map(point => point.coordinates)} />
                         <RadarScanOverlay />
                         {destroyedTarget !== null && (

@@ -21,7 +21,7 @@ export const CannonList = () => {
     }
 
     return (
-        <div data-testid="cannon-list" className="flex flex-row gap-4 items-center justify-center">
+        <div data-testid="cannon-list" className="flex flex-wrap gap-4 items-center justify-center">
             {cannons.map((cannon) => (
                 <Cannon
                     key={cannon.generation}
